@@ -25,7 +25,7 @@ sonar-list-issues my-project --pr 42                       # on a pull request
 
 This skill requires the SonarQube MCP Server to be configured and the tool `mcp__sonarqube__search_sonar_issues_in_projects` to be available in your session.
 
-If the tool call fails, surface the tool error verbatim and stop. Auth, credentials, and MCP server configuration are runtime infrastructure concerns and are not user-fixable from chat — do not ask the user to verify env vars or to install or run any CLI.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 
