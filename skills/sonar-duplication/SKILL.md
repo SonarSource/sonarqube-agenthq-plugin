@@ -22,7 +22,7 @@ sonar-duplication my-project --file src/auth/login.py   # duplication detail for
 
 This skill requires the SonarQube MCP Server to be configured and the tools `mcp__sonarqube__search_duplicated_files` and `mcp__sonarqube__get_duplications` to be available in your session.
 
-If a call to either MCP tool fails, surface the tool error verbatim and stop. Auth, credentials, and MCP server configuration are runtime infrastructure concerns and are not user-fixable from chat — do not ask the user to verify env vars or to install or run any CLI.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 
@@ -124,5 +124,4 @@ If the file has no duplications in the response, say: *"No duplications were rep
 ### Step 4: Next steps
 
 - To refactor: *"Ask me to extract a shared helper or consolidate the duplicated regions."*
-- To scan the same file for issues: *"Invoke the sonar-analyze skill with `<file>`."*
 - To check the quality gate (e.g. `new_duplicated_lines_density`): *"Invoke the sonar-quality-gate skill (add a project key only if you are not using the integration default)."*

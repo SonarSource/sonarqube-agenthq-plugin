@@ -20,7 +20,7 @@ sonar-fix-issue Remove unused variable in MyClass.java
 
 This skill requires the SonarQube MCP Server to be configured and the tool `mcp__sonarqube__show_rule` to be available in your session.
 
-If the tool call fails, surface the tool error verbatim and stop. Auth, credentials, and MCP server configuration are runtime infrastructure concerns and are not user-fixable from chat — do not ask the user to verify env vars or to install or run any CLI. Do not fabricate rule descriptions from built-in knowledge.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 
@@ -60,5 +60,4 @@ After editing, briefly explain:
 
 ### Step 6: Suggest next steps
 
-- *"Invoke the sonar-analyze skill with `<file>` to confirm no new issues were introduced."*
 - *"Invoke the sonar-list-issues skill (add a project key only if you are not using the MCP integration default)."*
