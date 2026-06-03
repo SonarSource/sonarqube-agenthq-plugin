@@ -21,7 +21,7 @@ sonar-dependency-risks my-project --pr 42
 
 This skill requires SonarQube Advanced Security (available on SonarQube Cloud Enterprise plan), the SonarQube MCP Server to be configured, and the tool `mcp__sonarqube__search_dependency_risks` to be available in your session.
 
-If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop. If the error indicates the feature is unavailable, note plainly that SCA requires SonarQube Advanced Security (SonarQube Cloud Enterprise plan).
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps (direct URL is https://sonarcloud.io/account/access-tokens?tab=github_agent_hq). Otherwise surface the tool error verbatim and stop. If the error indicates the feature is unavailable, note plainly that SCA requires SonarQube Advanced Security (SonarQube Cloud Enterprise plan).
 
 ## Instructions
 

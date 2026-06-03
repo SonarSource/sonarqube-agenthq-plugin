@@ -11,7 +11,7 @@ This plugin is **GitHub agent apps-only**. There is no manual authentication to 
   - `sonar-quality-gate` — quality gate pass/fail with per-condition detail
   - `sonar-list-issues` — search/filter bugs, vulnerabilities, and code smells
   - `sonar-fix-issue` — apply a fix for a specific rule violation
-  - `sonar-analyze` — run server-side analysis on a single file with project context
+  - `sonar-analyze` — run server-side analysis on a single file
   - `sonar-coverage` — find files with low coverage and inspect uncovered lines
   - `sonar-duplication` — list duplicated files and inspect duplication blocks
   - `sonar-dependency-risks` — SCA (Advanced Security) dependency risks
