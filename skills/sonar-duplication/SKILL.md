@@ -22,7 +22,7 @@ sonar-duplication my-project --file src/auth/login.py   # duplication detail for
 
 This skill requires the SonarQube MCP Server to be configured and the tools `mcp__sonarqube__search_duplicated_files` and `mcp__sonarqube__get_duplications` to be available in your session.
 
-If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps (direct URL is https://sonarcloud.io/account/access-tokens?tab=github_agent_hq). Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 

@@ -23,7 +23,7 @@ sonar-analyze src/auth/login.py      # analyze a specific file
 
 This skill requires the SonarQube MCP Server to be configured and the tool `mcp__sonarqube__analyze_code_snippet` to be available in your session.
 
-If the tool call fails, surface the tool error verbatim and stop. Auth, credentials, and MCP server configuration are runtime infrastructure concerns and are not user-fixable from chat — do not ask the user to verify env vars or to install or run any CLI.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps (direct URL is https://sonarcloud.io/account/access-tokens?tab=github_agent_hq). Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 
