@@ -8,6 +8,10 @@ argument-hint: "[file-path]"
 
 Analyze code for quality and security issues using the SonarQube MCP Server.
 
+## Disclaimer
+
+The `analyze_code_snippet` tool does **not** have full project context — it analyzes **only a single file** at a time. Results may not be complete compared to a full SonarQube project scan. When presenting results, mention this limitation if the user might expect exhaustive coverage.
+
 ## Usage
 
 ```

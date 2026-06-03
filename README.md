@@ -1,8 +1,8 @@
-# SonarQube Plugin for GitHub AgentHQ
+# SonarQube Plugin for GitHub agent apps
 
-Bring SonarQube Cloud code quality and security analysis into **GitHub AgentHQ**: a custom agent (`sonarqube`) backed by the SonarQube MCP Server and a set of skills covering the most common quality, security, coverage, duplication, and SCA workflows.
+Bring SonarQube Cloud code quality and security analysis into **Agent Apps for GitHub**: a custom agent (`sonarqube`) backed by the SonarQube MCP Server and a set of skills covering the most common quality, security, coverage, duplication, and SCA workflows.
 
-This plugin is **AgentHQ-only**. There is no CLI to install, no manual authentication to perform, and no IDE-side configuration. Credentials are injected at runtime by AgentHQ via OIDC.
+This plugin is **GitHub agent apps-only**. There is no manual authentication to perform. Credentials are injected at runtime by GitHub agent app via OIDC.
 
 ## What you get
 
@@ -20,7 +20,7 @@ This plugin is **AgentHQ-only**. There is no CLI to install, no manual authentic
 
 ## How authentication works
 
-The agent definition (`agents/main.agent.md`) configures the SonarQube MCP Server with three environment variables, all sourced from AgentHQ:
+The agent definition (`agents/main.agent.md`) configures the SonarQube MCP Server with three environment variables, all sourced from GitHub agent app:
 
 | Variable                | Source                                            | Purpose                                           |
 | ----------------------- | ------------------------------------------------- | ------------------------------------------------- |
@@ -28,101 +28,11 @@ The agent definition (`agents/main.agent.md`) configures the SonarQube MCP Serve
 | `SONARQUBE_ORG`         | `${{ vars.COPILOT_MCP_SONARQUBE_ORG }}`           | SonarQube Cloud organization key                  |
 | `SONARQUBE_PROJECT_KEY` | `${{ vars.COPILOT_MCP_SONARQUBE_PROJECT_KEY }}`   | Default project key for MCP tools                 |
 
-The OIDC token is minted by AgentHQ on every session against the audience `https://sonarcloud.io` and exchanged with SonarQube Cloud — no static tokens, no user prompts, no system keychain.
+The OIDC token is minted by GitHub on every session against the audience `https://sonarcloud.io` and exchanged with SonarQube Cloud — no static tokens, no user prompts, no system keychain.
 
 ## Repository setup
 
-To use the plugin in your repository, configure two **Copilot variables** (Settings → Copilot → Variables) on the repository, organization, or enterprise level:
-
-| Variable                            | Value                                                   |
-| ----------------------------------- | ------------------------------------------------------- |
-| `COPILOT_MCP_SONARQUBE_ORG`         | Your SonarQube Cloud organization key                   |
-| `COPILOT_MCP_SONARQUBE_PROJECT_KEY` | The SonarQube Cloud project key analyzed by this repo   |
-
-Once both variables are set and the agent is installed, sessions will reach SonarQube Cloud automatically.
-
-### Optional: `sonar-project.properties`
-
-If you want the agent to fall back to a key derived from the repo (rather than from `COPILOT_MCP_SONARQUBE_PROJECT_KEY`), drop a `sonar-project.properties` file at the repo root:
-
-```properties
-sonar.projectKey=my-project
-sonar.projectName=My Project
-sonar.projectVersion=1.0
-sonar.sources=src
-sonar.sourceEncoding=UTF-8
-```
-
-The agent resolves project keys in the following order: user-provided argument → `.sonarlint/connectedMode.json` → repo config files (`sonar-project.properties`, `pom.xml`, Gradle, `package.json`) → CI files (`.github/workflows/*.yml`, etc.) → `search_my_sonarqube_projects` when only a project name is given.
-
-## Usage
-
-Invoke skills from chat with their slash form. The agent will pick a skill automatically based on the request when phrasing is clear; you can also call them explicitly.
-
-### Quality gate
-
-```
-/sonarqube:sonar-quality-gate
-/sonarqube:sonar-quality-gate my-project --branch main
-/sonarqube:sonar-quality-gate my-project --pr 42
-```
-
-### List issues
-
-```
-/sonarqube:sonar-list-issues
-/sonarqube:sonar-list-issues my-project --severity HIGH,BLOCKER
-/sonarqube:sonar-list-issues my-project --qualities SECURITY
-/sonarqube:sonar-list-issues my-project --component src/auth/login.py
-/sonarqube:sonar-list-issues my-project --pr 42
-```
-
-### Fix an issue
-
-```
-/sonarqube:sonar-fix-issue java:S1481 src/main/java/MyClass.java:42
-/sonarqube:sonar-fix-issue python:S2077 src/auth/login.py:34
-```
-
-### Analyze a file
-
-```
-/sonarqube:sonar-analyze
-/sonarqube:sonar-analyze src/auth/login.py
-```
-
-### Coverage
-
-```
-/sonarqube:sonar-coverage
-/sonarqube:sonar-coverage --max 50
-/sonarqube:sonar-coverage --file src/auth/login.py
-/sonarqube:sonar-coverage --pr 42
-```
-
-### Duplication
-
-```
-/sonarqube:sonar-duplication
-/sonarqube:sonar-duplication my-project --pr 42
-/sonarqube:sonar-duplication my-project --file src/auth/login.py
-```
-
-### Dependency risks (Advanced Security)
-
-```
-/sonarqube:sonar-dependency-risks
-/sonarqube:sonar-dependency-risks my-project --pr 42
-```
-
-Requires SonarQube Advanced Security on the connected organization (SonarQube Cloud Enterprise plan).
-
-### List projects
-
-```
-/sonarqube:sonar-list-projects
-/sonarqube:sonar-list-projects my-project
-```
+To use the plugin in your repository, follow the [guide in our docs](https://docs.sonarsource.com/agent-centric-development-cycle/developer-tools/agent-plugins/github-agent-apps).
 
 ## What the agent does beyond skills
 
@@ -133,8 +43,6 @@ When a user request doesn't map cleanly to one of the eight skills, the agent ca
 - Listing quality gates configured in the organization (`list_quality_gates`)
 - Working with Security Hotspots (`search_security_hotspots`, `show_security_hotspot`, `change_security_hotspot_status`)
 - Accepting / marking false-positive / reopening an issue (`change_sonar_issue_status`)
-- Pre-flight dependency checks before manifest edits (`check_dependency`) — **always called before adding or upgrading a third-party package**
-- Cross-module code navigation and architecture-compliance checks (`get_current_architecture`, `get_intended_architecture`, `get_references`, `get_type_hierarchy`, `get_upstream_call_flow`, `get_downstream_call_flow`, `get_source_code`, `search_by_signature_patterns`, `search_by_body_patterns`) — preferred over `grep`/`find` in supported languages
 
 See `agents/main.agent.md` for the full routing rules and operating principles.
 
