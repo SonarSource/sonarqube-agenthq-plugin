@@ -21,7 +21,7 @@ sonar-list-projects --page-size 100      # limit page size
 
 This skill requires the SonarQube MCP Server to be configured and the tool `mcp__sonarqube__search_my_sonarqube_projects` to be available in your session.
 
-If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps (direct URL is https://sonarqube.us/account/access-tokens?tab=github_agent_hq). Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 

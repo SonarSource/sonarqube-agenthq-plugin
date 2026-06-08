@@ -21,7 +21,7 @@ sonar-quality-gate my-project --pr 42
 
 This skill requires the SonarQube MCP Server to be configured and the tool `mcp__sonarqube__get_project_quality_gate_status` to be available in your session.
 
-If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps. Otherwise surface the tool error verbatim and stop.
+If a tool fails due to authentication problems, ask the user to ensure they have given their consent for automatic token exchange through SonarQube Cloud > My Account > Access Tokens > Agent Apps (direct URL is https://sonarqube.us/account/access-tokens?tab=github_agent_hq). Otherwise surface the tool error verbatim and stop.
 
 ## Instructions
 
