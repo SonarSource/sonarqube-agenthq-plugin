@@ -11,7 +11,7 @@ This plugin is **GitHub agent apps-only**. There is no manual authentication to 
   - `sonar-quality-gate` — quality gate pass/fail with per-condition detail
   - `sonar-list-issues` — search/filter bugs, vulnerabilities, and code smells
   - `sonar-fix-issue` — apply a fix for a specific rule violation
-  - `sonar-analyze` — run server-side analysis on a single file with project context
+  - `sonar-analyze` — run server-side analysis on a single file
   - `sonar-coverage` — find files with low coverage and inspect uncovered lines
   - `sonar-duplication` — list duplicated files and inspect duplication blocks
   - `sonar-dependency-risks` — SCA (Advanced Security) dependency risks
@@ -28,7 +28,7 @@ The agent definition (`agents/main.agent.md`) configures the SonarQube MCP Serve
 | `SONARQUBE_ORG`         | `${{ vars.COPILOT_MCP_SONARQUBE_ORG }}`           | SonarQube Cloud organization key                  |
 | `SONARQUBE_PROJECT_KEY` | `${{ vars.COPILOT_MCP_SONARQUBE_PROJECT_KEY }}`   | Default project key for MCP tools                 |
 
-The OIDC token is minted by GitHub on every session against the audience `https://sonarcloud.io` and exchanged with SonarQube Cloud — no static tokens, no user prompts, no system keychain.
+The OIDC token is minted by GitHub on every session against the audience `https://sonarqube.us` and exchanged with SonarQube Cloud — no static tokens, no user prompts, no system keychain.
 
 ## Repository setup
 
