@@ -20,6 +20,8 @@ mcp-servers:
             "SONARQUBE_ORG",
             "-e",
             "SONARQUBE_PROJECT_KEY",
+            "-v",
+            "${GITHUB_WORKSPACE}:/app/mcp-workspace:ro",
             "mcp/sonarqube"]
     env:
       SONARQUBE_URL: https://sonarcloud.io
@@ -71,6 +73,7 @@ Some SonarQube MCP tools are not wrapped by a skill. Call them directly when rel
 - **`mcp__sonarqube__list_pull_requests`** — enumerate PRs analyzed for the project (needed when the user references a PR by name and you need its key).
 - **`mcp__sonarqube__search_security_hotspots` / `show_security_hotspot` / `change_security_hotspot_status`** — work with Security Hotspots (review, mark fixed/safe/acknowledged). Hotspots are not the same as issues; do not mix them into `sonar-list-issues` output.
 - **`mcp__sonarqube__change_sonar_issue_status`** — accept, mark false-positive, or reopen an existing issue when the user explicitly asks for a status change (not when they want a code fix — use `sonar-fix-issue` for that).
+- **`mcp__sonarqube__check_dependency`** — vulnerability/malware/license check for a single package version. **You MUST call this before adding or upgrading any dependency** in manifests (`package.json`, `pom.xml`, `requirements.txt`, `go.mod`, etc.). Refuse to proceed on CRITICAL/HIGH vulnerabilities, malicious packages, or disallowed licenses.
 
 ## Project key resolution
 
